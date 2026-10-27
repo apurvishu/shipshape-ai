@@ -1,129 +1,88 @@
-# 🚢 ShipShape AI
+# 🚀 ShipShape AI
 
-> **Release-Readiness Dashboard & DevSecOps Automation Workflow**  
-> Built for the GitLab Transcend Hackathon: *"Life After Code: The Path to Production at the Speed of Imagination"*
+### Release Readiness Dashboard for Modern Software Teams
 
----
+ShipShape AI is a web-based release readiness dashboard designed to help developers visualize software delivery workflows, review release checks, and identify potential blockers before deployment.
 
-## 🌟 Overview
+The platform brings important aspects of the software delivery lifecycle into a unified interface, making release information easier to explore and understand.
 
-**ShipShape AI** solves the post-commit blind spot in modern software delivery. While writing code is faster than ever with AI assistants, moving that code safely from commit to production remains plagued by fragmented pipelines, opaque security findings, disconnected compliance checks, and nervous manual approvals.
+## ✨ Features
 
-ShipShape AI provides a unified, intelligent single-pane-of-glass dashboard and pipeline automation suite that tracks changes through all nine post-code DevSecOps stages: **Plan, Create, Verify, Package, Secure, Release, Configure, Monitor, and Govern**.
+- **Release Readiness Score** — A consolidated overview of release readiness.
+- **DevSecOps Lifecycle** — Visual representation of software delivery lifecycle stages.
+- **Security Overview** — Review security-related findings and risk indicators.
+- **Pipeline Dashboard** — Explore pipeline status and related information.
+- **Release Management** — View release checks and approval gates.
+- **Interactive Dashboard** — Navigate between lifecycle, pipeline, security, release, and approval sections.
+- **Demo Mode** — Explore the interface using sample data.
 
----
+## 🛠️ Tech Stack
 
-## ✨ Key Features
+- Next.js
+- React
+- TypeScript
+- CSS / Tailwind CSS, if configured in the project
+- Vercel
 
-- **🎯 Real-Time Release-Readiness Scoring (0–100)**: Deterministic algorithm evaluating test coverage, security severity findings, stage checks, and policy conformance.
-- **🔄 Complete 9-Stage DevSecOps Lifecycle**: Visual progression across the entire GitLab lifecycle with status badges, detailed check items, and duration logs.
-- **🛡️ Integrated Security & Vulnerability Intelligence**: Highlighting SAST, secret detection, container scan, and dependency vulnerability findings with severity ratings and one-click remediation guidance.
-- **🚦 Production Approval Gate**: Strict manual promotion controls. Automated policy verification ensures mandatory checks and zero critical/high vulnerabilities prior to release.
-- **🤖 GitLab Duo Integration**: Designed to integrate with GitLab Duo Code Review and custom automated release analysis workflows.
-- **📊 Exportable Release & Policy Reports**: Machine-readable JSON and XML pipeline reports (`reports/release-report.json`, `reports/policy-report.json`, `reports/secret-scan.json`).
-- **💡 Built-in Demo Mode**: Seamless toggle between live system data and curated sample scenarios demonstrating risk detection and release gating.
+## 🌐 Live Demo
 
----
+**Live Website:** [https://shipshape-ai-2026-git-main-apurvishu11-5395s-projects.vercel.app/](https://shipshape-ai-2026-git-main-apurvishu11-5395s-projects.vercel.app/)
 
-## 🏗️ Architecture & Tech Stack
+## 📸 Overview
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, React 19, TypeScript)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with a sleek dark-mode glassmorphic design system
-- **Icons**: Accessible unicode and inline SVGs for zero extra runtime overhead
-- **Testing**: Jest 30 with `@testing-library/react` and `ts-jest`
-- **Automation Scripts**: Native Node.js ESM scripts for secret scanning, release analysis, and policy enforcement
-- **CI/CD**: GitLab CI pipeline (`.gitlab-ci.yml`) covering `verify`, `secure`, `package`, `release`, and `govern`
+ShipShape AI provides a centralized interface for understanding release readiness and exploring software delivery workflows.
 
----
+The dashboard includes readiness indicators, check summaries, security findings, pipeline information, and approval status.
 
-## 🚀 Quick Start
+> **Note:** Demo Mode uses sample data. Scores, findings, and check results are illustrative and do not represent live CI/CD execution or actual security scans.
+
+## ⚙️ Getting Started
 
 ### Prerequisites
 
-- Node.js 20+ (Node 24 supported)
-- npm 10+
+- Node.js (LTS recommended)
+- npm
 
 ### Installation
 
+Clone the repository:
+
 ```bash
-# Clone the repository
-git clone https://gitlab.com/your-username/shipshape-ai.git
-cd shipshape-ai
-
-# Install dependencies
-npm install
-
-# Copy environment configuration
-cp .env.example .env.local
+git clone https://github.com/apurvishu/shipshape-ai
 ```
 
-### Development Server
+Navigate to the project directory:
+
+```bash
+cd shipshape-ai
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to view the ShipShape AI dashboard.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Health Check Endpoint
+## 🔭 Future Improvements
 
-```bash
-curl http://localhost:3000/api/health
-```
-
----
-
-## 🧪 Available Scripts
-
-| Script | Command | Purpose |
-|---|---|---|
-| **Development** | `npm run dev` | Starts Next.js development server |
-| **Build** | `npm run build` | Compiles optimized production bundle |
-| **Lint** | `npm run lint` | Runs ESLint checks |
-| **Type Check** | `npm run type-check` | Validates TypeScript types (`tsc --noEmit`) |
-| **Unit Tests** | `npm test` | Runs Jest unit test suites |
-| **CI Tests** | `npm run test:ci` | Runs Jest with coverage and JSON/JUnit reporters |
-| **Secret Scan** | `npm run secret-scan` | Scans workspace files for leaked keys and credentials |
-| **Release Analysis** | `npm run release-analysis` | Evaluates pipeline artifacts and calculates readiness score |
-| **Policy Check** | `npm run policy-check` | Validates release against promotion policies |
-| **Full Suite** | `npm run checks` | Executes lint, type-check, tests, and secret scan in sequence |
-
----
-
-## 📋 DevSecOps Lifecycle Stages
-
-```mermaid
-graph LR
-    Plan["📋 Plan"] --> Create["💻 Create"]
-    Create --> Verify["🧪 Verify"]
-    Verify --> Package["📦 Package"]
-    Package --> Secure["🔒 Secure"]
-    Secure --> Release["🚀 Release"]
-    Release --> Configure["⚙️ Configure"]
-    Configure --> Monitor["📈 Monitor"]
-    Monitor --> Govern["🏛️ Govern"]
-```
-
-1. **Plan**: Requirements traceability and GitLab issue tracking.
-2. **Create**: Source code branching, merge requests, and GitLab Duo Code Review.
-3. **Verify**: Automated unit tests, integration tests, type checks, and linter rules.
-4. **Package**: Production builds, container images, and deployment packaging.
-5. **Secure**: Static analysis (SAST), dependency scanning, secret detection, container inspection.
-6. **Release**: Release notes generation, semantic tagging, and staged deployment.
-7. **Configure**: Infrastructure as Code validation, environment drift detection.
-8. **Monitor**: Synthetic health checks, application telemetry, uptime monitoring.
-9. **Govern**: Regulatory compliance, audit trails, and strict manual approval gates.
-
----
-
-## 🔒 Security & Safe Operating Principles
-
-- **Zero Auto-Deploy to Production**: Production promotion strictly requires manual human sign-off.
-- **Deterministic Promotion Checks**: The readiness score calculator and `policy-check` script enforce zero open critical/high vulnerabilities and passing test suites.
-- **No Hardcoded Credentials**: Automatic pre-commit and CI secret scanning blocks secrets from entering git history.
-
----
+- Integration with GitLab CI/CD pipelines
+- Automated security scanning and test-result ingestion
+- Configurable release policies and approval workflows
+- Evidence-based deployment risk assessment
+- Historical release analytics and monitoring
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License, if an MIT `LICENSE` file is included in the repository.
+
+---
+
+Built to make software release workflows more visible, understandable, and manageable.
