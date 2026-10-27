@@ -1,0 +1,450 @@
+/**
+ * Demo data for ShipShape AI dashboard.
+ * ⚠️ ALL DATA IN THIS FILE IS SAMPLE/DEMO DATA — NOT REAL CI RESULTS.
+ * This data is used only when demo mode is enabled.
+ */
+
+import type {
+  LifecycleStage,
+  Pipeline,
+  SecurityFinding,
+  ReleaseReport,
+  ApprovalGate,
+} from '@/types';
+
+// ── Lifecycle Stages (Demo) ──
+
+export const DEMO_STAGES: LifecycleStage[] = [
+  {
+    id: 'plan',
+    name: 'Plan',
+    icon: '📋',
+    description: 'Requirements, issue tracking, and project planning',
+    status: 'pass',
+    checks: [
+      {
+        id: 'plan-issues',
+        name: 'Issues Tracked',
+        description: 'All work items are tracked in GitLab Issues',
+        status: 'pass',
+        details: '12 issues closed, 3 in progress',
+        mandatory: false,
+      },
+      {
+        id: 'plan-milestones',
+        name: 'Milestone Defined',
+        description: 'Release milestone created with due date',
+        status: 'pass',
+        details: 'v1.0.0 milestone — due Oct 30, 2026',
+        mandatory: false,
+      },
+    ],
+  },
+  {
+    id: 'create',
+    name: 'Create',
+    icon: '💻',
+    description: 'Code development, merge requests, and code review',
+    status: 'pass',
+    checks: [
+      {
+        id: 'create-mr',
+        name: 'Merge Request Approved',
+        description: 'All MRs have at least one approval',
+        status: 'pass',
+        details: '5 MRs merged with approvals',
+        mandatory: true,
+      },
+      {
+        id: 'create-review',
+        name: 'Code Review Complete',
+        description: 'All changes reviewed by at least one team member',
+        status: 'pass',
+        details: 'GitLab Duo Code Review Flow enabled',
+        mandatory: true,
+      },
+    ],
+  },
+  {
+    id: 'verify',
+    name: 'Verify',
+    icon: '✅',
+    description: 'Automated testing, linting, and code quality checks',
+    status: 'pass',
+    checks: [
+      {
+        id: 'verify-lint',
+        name: 'Linting Passed',
+        description: 'ESLint and TypeScript checks passed',
+        status: 'pass',
+        details: '0 errors, 0 warnings',
+        timestamp: '2026-10-27T10:00:00Z',
+        mandatory: true,
+      },
+      {
+        id: 'verify-tests',
+        name: 'Unit Tests Passed',
+        description: 'All unit tests pass with sufficient coverage',
+        status: 'pass',
+        details: '24 tests passed, 0 failed — 87% coverage',
+        timestamp: '2026-10-27T10:01:00Z',
+        mandatory: true,
+      },
+      {
+        id: 'verify-types',
+        name: 'Type Check Passed',
+        description: 'TypeScript compilation succeeds without errors',
+        status: 'pass',
+        details: 'No type errors found',
+        timestamp: '2026-10-27T10:00:30Z',
+        mandatory: true,
+      },
+    ],
+  },
+  {
+    id: 'package',
+    name: 'Package',
+    icon: '📦',
+    description: 'Build artifacts, container images, and release packaging',
+    status: 'pass',
+    checks: [
+      {
+        id: 'package-build',
+        name: 'Production Build',
+        description: 'Next.js production build completes successfully',
+        status: 'pass',
+        details: 'Build size: 412 KB — 14 pages generated',
+        timestamp: '2026-10-27T10:02:00Z',
+        mandatory: true,
+      },
+      {
+        id: 'package-artifact',
+        name: 'Artifact Stored',
+        description: 'Build artifact uploaded to GitLab pipeline',
+        status: 'pass',
+        details: 'Artifact retained for 7 days',
+        mandatory: true,
+      },
+    ],
+  },
+  {
+    id: 'secure',
+    name: 'Secure',
+    icon: '🔒',
+    description: 'Dependency scanning, secret detection, and vulnerability checks',
+    status: 'warn',
+    checks: [
+      {
+        id: 'secure-deps',
+        name: 'Dependency Audit',
+        description: 'npm audit for known vulnerabilities',
+        status: 'warn',
+        details: '0 critical, 0 high, 2 moderate vulnerabilities',
+        timestamp: '2026-10-27T10:03:00Z',
+        mandatory: true,
+      },
+      {
+        id: 'secure-secrets',
+        name: 'Secret Detection',
+        description: 'No secrets or credentials found in source code',
+        status: 'pass',
+        details: 'Scanned 47 files — no secrets detected',
+        timestamp: '2026-10-27T10:03:30Z',
+        mandatory: true,
+      },
+      {
+        id: 'secure-license',
+        name: 'License Compliance',
+        description: 'All dependencies use approved licenses',
+        status: 'pass',
+        details: 'All licenses are MIT, Apache-2.0, or ISC',
+        mandatory: false,
+      },
+    ],
+  },
+  {
+    id: 'release',
+    name: 'Release',
+    icon: '🚀',
+    description: 'Release readiness, versioning, and release notes',
+    status: 'pass',
+    checks: [
+      {
+        id: 'release-readiness',
+        name: 'Readiness Score',
+        description: 'Overall release readiness assessment',
+        status: 'pass',
+        details: 'Score: 92/100 — Ready for release',
+        mandatory: true,
+      },
+      {
+        id: 'release-notes',
+        name: 'Release Notes Generated',
+        description: 'Changelog and release notes are prepared',
+        status: 'pass',
+        details: '8 features, 3 fixes documented',
+        mandatory: true,
+      },
+    ],
+  },
+  {
+    id: 'configure',
+    name: 'Configure',
+    icon: '⚙️',
+    description: 'Infrastructure configuration, feature flags, and environments',
+    status: 'pass',
+    checks: [
+      {
+        id: 'configure-env',
+        name: 'Environment Config',
+        description: 'Production environment variables are set',
+        status: 'pass',
+        details: 'All required variables configured',
+        mandatory: true,
+      },
+      {
+        id: 'configure-flags',
+        name: 'Feature Flags',
+        description: 'Feature flags reviewed for release',
+        status: 'pass',
+        details: '2 flags enabled, 1 disabled',
+        mandatory: false,
+      },
+    ],
+  },
+  {
+    id: 'monitor',
+    name: 'Monitor',
+    icon: '📊',
+    description: 'Observability, alerting, and performance monitoring',
+    status: 'pending',
+    checks: [
+      {
+        id: 'monitor-health',
+        name: 'Health Endpoint',
+        description: 'Application health check endpoint is available',
+        status: 'pass',
+        details: '/api/health returns 200 OK',
+        mandatory: true,
+      },
+      {
+        id: 'monitor-alerts',
+        name: 'Alert Rules Configured',
+        description: 'Monitoring and alerting rules are in place',
+        status: 'pending',
+        details: 'Planned — requires monitoring infrastructure',
+        mandatory: false,
+      },
+    ],
+  },
+  {
+    id: 'govern',
+    name: 'Govern',
+    icon: '🏛️',
+    description: 'Compliance, policy enforcement, and approval workflows',
+    status: 'pending',
+    checks: [
+      {
+        id: 'govern-policy',
+        name: 'Release Policy',
+        description: 'Release policy checks pass',
+        status: 'pass',
+        details: 'All mandatory checks satisfied',
+        mandatory: true,
+      },
+      {
+        id: 'govern-approval',
+        name: 'Production Approval',
+        description: 'Release approved by authorized approver',
+        status: 'pending',
+        details: 'Awaiting approval',
+        mandatory: true,
+      },
+    ],
+  },
+];
+
+// ── Pipeline History (Demo) ──
+
+export const DEMO_PIPELINES: Pipeline[] = [
+  {
+    id: 'demo-pipe-1',
+    ref: 'main',
+    sha: 'a1b2c3d',
+    status: 'success',
+    createdAt: '2026-10-27T09:45:00Z',
+    finishedAt: '2026-10-27T09:52:30Z',
+    duration: 450,
+    source: 'demo',
+    jobs: [
+      { id: 'j1', name: 'lint', stage: 'verify', status: 'success', duration: 45, startedAt: '2026-10-27T09:45:10Z', finishedAt: '2026-10-27T09:45:55Z' },
+      { id: 'j2', name: 'test', stage: 'verify', status: 'success', duration: 90, startedAt: '2026-10-27T09:45:10Z', finishedAt: '2026-10-27T09:46:40Z' },
+      { id: 'j3', name: 'dependency-audit', stage: 'secure', status: 'success', duration: 30, startedAt: '2026-10-27T09:47:00Z', finishedAt: '2026-10-27T09:47:30Z' },
+      { id: 'j4', name: 'secret-detection', stage: 'secure', status: 'success', duration: 25, startedAt: '2026-10-27T09:47:00Z', finishedAt: '2026-10-27T09:47:25Z' },
+      { id: 'j5', name: 'build', stage: 'package', status: 'success', duration: 120, startedAt: '2026-10-27T09:48:00Z', finishedAt: '2026-10-27T09:50:00Z', artifacts: ['build.zip'] },
+      { id: 'j6', name: 'release-analysis', stage: 'release', status: 'success', duration: 15, startedAt: '2026-10-27T09:50:30Z', finishedAt: '2026-10-27T09:50:45Z', artifacts: ['release-report.json'] },
+      { id: 'j7', name: 'policy-check', stage: 'govern', status: 'success', duration: 10, startedAt: '2026-10-27T09:51:00Z', finishedAt: '2026-10-27T09:51:10Z' },
+    ],
+  },
+  {
+    id: 'demo-pipe-2',
+    ref: 'feature/dashboard',
+    sha: 'e5f6g7h',
+    status: 'failed',
+    createdAt: '2026-10-26T16:30:00Z',
+    finishedAt: '2026-10-26T16:35:00Z',
+    duration: 300,
+    source: 'demo',
+    jobs: [
+      { id: 'j8', name: 'lint', stage: 'verify', status: 'success', duration: 40, startedAt: '2026-10-26T16:30:10Z', finishedAt: '2026-10-26T16:30:50Z' },
+      { id: 'j9', name: 'test', stage: 'verify', status: 'failed', duration: 60, startedAt: '2026-10-26T16:30:10Z', finishedAt: '2026-10-26T16:31:10Z' },
+      { id: 'j10', name: 'dependency-audit', stage: 'secure', status: 'canceled', duration: 0 },
+      { id: 'j11', name: 'build', stage: 'package', status: 'canceled', duration: 0 },
+    ],
+  },
+  {
+    id: 'demo-pipe-3',
+    ref: 'main',
+    sha: 'i8j9k0l',
+    status: 'success',
+    createdAt: '2026-10-25T11:00:00Z',
+    finishedAt: '2026-10-25T11:08:00Z',
+    duration: 480,
+    source: 'demo',
+    jobs: [
+      { id: 'j12', name: 'lint', stage: 'verify', status: 'success', duration: 42, startedAt: '2026-10-25T11:00:10Z', finishedAt: '2026-10-25T11:00:52Z' },
+      { id: 'j13', name: 'test', stage: 'verify', status: 'success', duration: 88, startedAt: '2026-10-25T11:00:10Z', finishedAt: '2026-10-25T11:01:38Z' },
+      { id: 'j14', name: 'dependency-audit', stage: 'secure', status: 'success', duration: 28, startedAt: '2026-10-25T11:02:00Z', finishedAt: '2026-10-25T11:02:28Z' },
+      { id: 'j15', name: 'secret-detection', stage: 'secure', status: 'success', duration: 22, startedAt: '2026-10-25T11:02:00Z', finishedAt: '2026-10-25T11:02:22Z' },
+      { id: 'j16', name: 'build', stage: 'package', status: 'success', duration: 115, startedAt: '2026-10-25T11:03:00Z', finishedAt: '2026-10-25T11:04:55Z', artifacts: ['build.zip'] },
+      { id: 'j17', name: 'release-analysis', stage: 'release', status: 'success', duration: 12, startedAt: '2026-10-25T11:05:30Z', finishedAt: '2026-10-25T11:05:42Z' },
+      { id: 'j18', name: 'policy-check', stage: 'govern', status: 'success', duration: 8, startedAt: '2026-10-25T11:06:00Z', finishedAt: '2026-10-25T11:06:08Z' },
+    ],
+  },
+];
+
+// ── Security Findings (Demo) ──
+
+export const DEMO_SECURITY_FINDINGS: SecurityFinding[] = [
+  {
+    id: 'demo-sec-1',
+    title: 'Prototype Pollution in lodash.merge',
+    severity: 'medium',
+    category: 'Dependency Vulnerability',
+    description: 'lodash versions prior to 4.17.21 are vulnerable to prototype pollution via the merge function.',
+    location: 'node_modules/lodash',
+    remediation: 'Upgrade lodash to version 4.17.21 or later. Run: npm update lodash',
+    cveId: 'CVE-2021-23337',
+    status: 'open',
+    source: 'demo',
+  },
+  {
+    id: 'demo-sec-2',
+    title: 'Regular Expression Denial of Service in semver',
+    severity: 'medium',
+    category: 'Dependency Vulnerability',
+    description: 'semver package versions before 7.5.2 are vulnerable to ReDoS via crafted version strings.',
+    location: 'node_modules/semver',
+    remediation: 'Upgrade semver to version 7.5.2 or later. Run: npm update semver',
+    cveId: 'CVE-2022-25883',
+    status: 'open',
+    source: 'demo',
+  },
+  {
+    id: 'demo-sec-3',
+    title: 'Cross-site Scripting in markdown parser',
+    severity: 'low',
+    category: 'Code Analysis',
+    description: 'User-supplied markdown content is rendered without sanitization in the release notes component.',
+    location: 'src/components/ReleaseNotes.tsx',
+    remediation: 'Sanitize HTML output from the markdown parser using DOMPurify or a similar library.',
+    status: 'resolved',
+    source: 'demo',
+  },
+  {
+    id: 'demo-sec-4',
+    title: 'No Content Security Policy Header',
+    severity: 'info',
+    category: 'Configuration',
+    description: 'The application does not set a Content-Security-Policy header, which helps prevent XSS attacks.',
+    remediation: 'Add a Content-Security-Policy header in next.config.ts or middleware.',
+    status: 'open',
+    source: 'demo',
+  },
+];
+
+// ── Release Report (Demo) ──
+
+export const DEMO_RELEASE_REPORT: ReleaseReport = {
+  version: '1.0.0',
+  timestamp: '2026-10-27T10:05:00Z',
+  readinessScore: 92,
+  testResults: [
+    { suite: 'Unit Tests', total: 24, passed: 24, failed: 0, skipped: 0, duration: 3200 },
+    { suite: 'Component Tests', total: 8, passed: 7, failed: 0, skipped: 1, duration: 5400 },
+    { suite: 'Lint Checks', total: 47, passed: 47, failed: 0, skipped: 0, duration: 1200 },
+  ],
+  securitySummary: {
+    critical: 0,
+    high: 0,
+    medium: 2,
+    low: 1,
+  },
+  riskLevel: 'low',
+  releaseNotes: [
+    'Added release-readiness dashboard with lifecycle view',
+    'Implemented pipeline history tracking with pass/fail visualization',
+    'Added security findings panel with remediation recommendations',
+    'Created approval gate workflow for production promotion',
+    'Integrated GitLab CI/CD pipeline with real verification checks',
+    'Added demo mode with clearly labelled sample data',
+    'Implemented responsive dark-mode UI with glassmorphism design',
+    'Added release report generation with test results and risk summary',
+  ],
+  approved: false,
+  blockers: ['Production approval has not been granted'],
+};
+
+// ── Approval Gates (Demo) ──
+
+export const DEMO_APPROVAL_GATES: ApprovalGate[] = [
+  {
+    id: 'gate-tests',
+    name: 'All Tests Pass',
+    required: true,
+    status: 'approved',
+    approver: 'CI Pipeline',
+    timestamp: '2026-10-27T09:52:30Z',
+  },
+  {
+    id: 'gate-security',
+    name: 'No Critical Vulnerabilities',
+    required: true,
+    status: 'approved',
+    approver: 'CI Pipeline',
+    timestamp: '2026-10-27T09:52:30Z',
+  },
+  {
+    id: 'gate-build',
+    name: 'Production Build Succeeds',
+    required: true,
+    status: 'approved',
+    approver: 'CI Pipeline',
+    timestamp: '2026-10-27T09:52:30Z',
+  },
+  {
+    id: 'gate-policy',
+    name: 'Release Policy Compliant',
+    required: true,
+    status: 'approved',
+    approver: 'CI Pipeline',
+    timestamp: '2026-10-27T09:52:30Z',
+  },
+  {
+    id: 'gate-manual',
+    name: 'Production Promotion Approved',
+    required: true,
+    status: 'pending',
+    reason: 'Requires manual approval from a project maintainer',
+  },
+];
