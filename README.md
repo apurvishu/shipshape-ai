@@ -81,7 +81,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📄 License
 
-This project is licensed under the MIT License, if an MIT `LICENSE` file is included in the repository.
+This project is licensed under the MIT License.
 
 ---
 
